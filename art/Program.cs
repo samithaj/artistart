@@ -27,7 +27,7 @@ namespace art
             else
                 itFetch = new fetchArtists();
 
-            Console.WriteLine("artist:" + args[0] + "\r\n\r\npath:" + path + "\r\n\r\nimages:" + args[2] + " images");
+            Console.WriteLine("artist:" + args[0] + "\r\n\r\nsave_path:" + path + "\r\n\r\nimages:" + args[2] + " images");
 
             itFetch.fetchArtList();
             itFetch.output();

@@ -17,7 +17,7 @@ namespace art
         public string path;
         public string limit;
 
-        public fetchArtists(string artist, string outpath,string max)
+        public fetchArtists(string artist, string outpath, string max)
         {
             artistName = artist;
             path = outpath;
@@ -38,8 +38,15 @@ namespace art
 
             Stream ReceiveStream = result.GetResponseStream();
             StreamReader readerOfStream = new StreamReader(ReceiveStream);
-            Artlist.LoadXml(readerOfStream.ReadToEnd());
-
+            try
+            {
+                Artlist.LoadXml(readerOfStream.ReadToEnd());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
             ReceiveStream.Close();
             result.Close();
 
@@ -58,16 +65,12 @@ namespace art
 
         public void output()
         {
+            Console.WriteLine("images to be fetched:");
             foreach (string list in urlList)
             {
                 Console.WriteLine(list);
             }
-
-
-
-            Console.WriteLine(urlList.Count);
-
-
+            //Console.WriteLine(urlList.Count);
         }
 
 
@@ -75,18 +78,13 @@ namespace art
         {
 
             if (urlList != null)
-                try
+                for (int j = 0; j < i; j++)
                 {
-                    for (int j = 0; j < i; j++)
-                    {
-                        WebRequest req = WebRequest.Create(urlList[j].ToString());
-                        WebResponse resoult = req.GetResponse();
-                        SaveBinaryFile(resoult, path + artistName + "_" + (j).ToString() + ".jpg");
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
+                    WebRequest req = WebRequest.Create(urlList[j].ToString());
+                    WebResponse resoult = req.GetResponse();
+                    Console.Write("\r\nfetching " + urlList[j].ToString());
+                    SaveBinaryFile(resoult, path + artistName + "_" + (j).ToString() + ".jpg");
+                    Console.Write("...done!");
                 }
         }
 
@@ -109,11 +107,17 @@ namespace art
                 } while (l > 0);
                 value = true;
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
             finally
             {
                 if (outStream != null) outStream.Close();
                 if (inStream != null) inStream.Close();
             }
+
             return value;
         }
     }
