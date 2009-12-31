@@ -70,21 +70,28 @@ namespace art
             {
                 Console.WriteLine(list);
             }
-            //Console.WriteLine(urlList.Count);
         }
 
 
         public void saveImage(int i)
         {
-
+            string src;
             if (urlList != null)
                 for (int j = 0; j < i; j++)
                 {
-                    WebRequest req = WebRequest.Create(urlList[j].ToString());
-                    WebResponse resoult = req.GetResponse();
                     Console.Write("\r\nfetching " + urlList[j].ToString());
-                    SaveBinaryFile(resoult, path + artistName + "_" + (j).ToString() + ".jpg");
-                    Console.Write("...done!");
+                    src=path + artistName + "_" + (j).ToString() + ".jpg";
+                    if (!File.Exists(src))
+                    {
+                        WebRequest req = WebRequest.Create(urlList[j].ToString());
+                        WebResponse resoult = req.GetResponse();
+                        SaveBinaryFile(resoult, src);
+                        Console.Write("...done!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("...already downloaded!");
+                    }
                 }
         }
 
