@@ -29,9 +29,13 @@ namespace art
 
             Console.WriteLine("artist:" + args[0] + "\r\n\r\nsave_path:" + path + "\r\n\r\nimages:" + args[2] + " images");
 
-            itFetch.fetchArtList();
+            if (itFetch.fetchArtList() < 0)
+            {
+                return;
+            }
             itFetch.output();
-            itFetch.saveImage(3);
+
+            itFetch.saveImage();
 
         }
     }

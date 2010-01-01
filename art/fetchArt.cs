@@ -27,28 +27,30 @@ namespace art
         {
         }
 
-        public void fetchArtList()
+        public int fetchArtList()
         {
 
-            if (artistName == null) return;
+            if (artistName == null) return -2;
             Artlist = new XmlDocument();
 
             WebRequest req = WebRequest.Create("http://ws.audioscrobbler.com/2.0/?method=artist.getimages&artist=" + artistName + "&api_key=aa55f6dc630a531d0a093c1ca77df129&limit=" + limit);
-            WebResponse result = req.GetResponse();
 
-            Stream ReceiveStream = result.GetResponseStream();
-            StreamReader readerOfStream = new StreamReader(ReceiveStream);
             try
             {
+                WebResponse result = req.GetResponse();
+                Stream ReceiveStream = result.GetResponseStream();
+                StreamReader readerOfStream = new StreamReader(ReceiveStream);
                 Artlist.LoadXml(readerOfStream.ReadToEnd());
+                ReceiveStream.Close();
+                result.Close();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 Console.ReadKey();
+                return -1;
             }
-            ReceiveStream.Close();
-            result.Close();
+
 
 
             XmlNodeList nodeList = Artlist.GetElementsByTagName("size");
@@ -61,6 +63,8 @@ namespace art
                     urlList.Add(nodeList.Item(i).InnerText);
                 }
             }
+
+            return nodeList.Count;
         }
 
         public void output()
@@ -73,16 +77,19 @@ namespace art
         }
 
 
-        public void saveImage(int i)
+        public void saveImage()
         {
             string src;
             if (urlList != null)
-                for (int j = 0; j < i; j++)
+                for (int j = 0; j < int.Parse(limit) && j < urlList.Count; j++)
                 {
-                    Console.Write("\r\nfetching " + urlList[j].ToString());
-                    src=path + artistName + "_" + (j).ToString() + ".jpg";
+
+                    src = path + artistName + "_" + (j).ToString() + ".jpg";
+                    Console.Write("\r\nfetching " + j.ToString() + " to " + src);
+
                     if (!File.Exists(src))
                     {
+
                         WebRequest req = WebRequest.Create(urlList[j].ToString());
                         WebResponse resoult = req.GetResponse();
                         SaveBinaryFile(resoult, src);
