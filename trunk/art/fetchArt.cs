@@ -79,8 +79,12 @@ namespace art
 
         public void saveImage()
         {
+
             string src;
             if (urlList != null)
+            {
+                WebRequest req;
+                WebResponse resoult;
                 for (int j = 0; j < int.Parse(limit) && j < urlList.Count; j++)
                 {
 
@@ -89,10 +93,17 @@ namespace art
 
                     if (!File.Exists(src))
                     {
-
-                        WebRequest req = WebRequest.Create(urlList[j].ToString());
-                        WebResponse resoult = req.GetResponse();
-                        SaveBinaryFile(resoult, src);
+                        try
+                        {
+                            req = WebRequest.Create(urlList[j].ToString());
+                            resoult = req.GetResponse();
+                            SaveBinaryFile(resoult, src);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            Console.ReadKey();
+                        }
                         Console.Write("...done!");
                     }
                     else
@@ -100,6 +111,7 @@ namespace art
                         Console.WriteLine("...already downloaded!");
                     }
                 }
+            }
         }
 
         private static bool SaveBinaryFile(WebResponse response, string savePath)
