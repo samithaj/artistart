@@ -1,9 +1,0 @@
-F:\docs\Visual Studio 2008\Projects\art\branches\artGui\bin\Debug\WindowsFormsApplication1.exe
-F:\docs\Visual Studio 2008\Projects\art\branches\artGui\bin\Debug\WindowsFormsApplication1.pdb
-F:\docs\Visual Studio 2008\Projects\art\branches\artGui\obj\Debug\ResolveAssemblyReference.cache
-F:\docs\Visual Studio 2008\Projects\art\branches\artGui\obj\Debug\WindowsFormsApplication1.Form1.resources
-F:\docs\Visual Studio 2008\Projects\art\branches\artGui\obj\Debug\WindowsFormsApplication1.imageShow.resources
-F:\docs\Visual Studio 2008\Projects\art\branches\artGui\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
-F:\docs\Visual Studio 2008\Projects\art\branches\artGui\obj\Debug\GUi.csproj.GenerateResource.Cache
-F:\docs\Visual Studio 2008\Projects\art\branches\artGui\obj\Debug\WindowsFormsApplication1.exe
-F:\docs\Visual Studio 2008\Projects\art\branches\artGui\obj\Debug\WindowsFormsApplication1.pdb
