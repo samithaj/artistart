@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Collections;
 using System.Xml;
 
-namespace WindowsFormsApplication1
+namespace artistArtGui
 {
     public partial class Form1 : Form
     {
@@ -27,9 +27,12 @@ namespace WindowsFormsApplication1
             backgroundWorker1.WorkerSupportsCancellation = true;
             artistName.Text = artistIn;
             pathIn = pathIn.Remove(pathIn.LastIndexOf(@"\") + 1);
+
             if (System.IO.Directory.Exists(pathIn))
                 path.Text = pathIn;
             number.Value = int.Parse(numberIn);
+
+            button1_Click(null, null);
 
         }
 
@@ -41,6 +44,7 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.artistLabel.Text = this.artistName.Text;
             this.splitContainer1.Panel1.Controls.Clear();
             statusLabel.Text = "Fetching Artistart list...";
             backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);

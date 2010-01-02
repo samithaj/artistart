@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace artistArtGui
 {
     partial class Form1
     {

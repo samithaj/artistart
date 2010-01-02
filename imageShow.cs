@@ -9,7 +9,7 @@ using System.IO;
 using System.Net;
 
 
-namespace WindowsFormsApplication1
+namespace artistArtGui
 {
     public partial class imageShow : UserControl
     {
@@ -110,7 +110,20 @@ namespace WindowsFormsApplication1
             this.imageContainer.ImageLocation = getPath();
             this.indicator.Enabled = false;
             this.indicator.Text = "Downloaded";
+            this.imageContainer.Click += new EventHandler(imageContainer_Click);
 
+        }
+
+        void imageContainer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(getPath());
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
         }
 
         void background1_DoWork(object sender, DoWorkEventArgs e)

@@ -5,7 +5,7 @@ using System.IO;
 using System.Net;
 
 
-namespace WindowsFormsApplication1
+namespace artistArtGui
 {
     static class downloadFromHttp
     {
