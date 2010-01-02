@@ -85,10 +85,13 @@ namespace art
             {
                 WebRequest req;
                 WebResponse resoult;
+                string filename;
                 for (int j = 0; j < int.Parse(limit) && j < urlList.Count; j++)
                 {
-
-                    src = path + artistName + "_" + (j).ToString() + ".jpg";
+                    filename = urlList[j].ToString();
+                    filename = filename.ToString().Remove(filename.ToString().LastIndexOf("/"));
+                    filename = filename.Remove(0, filename.LastIndexOf("/") + 1);
+                    src = path + artistName + "_" + filename + ".jpg";
                     Console.Write("\r\nfetching " + j.ToString() + " to " + src);
 
                     if (!File.Exists(src))

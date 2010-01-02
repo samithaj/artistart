@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "art", "art\art.csproj", "{C69C53AF-5A34-4EE5-BB5E-D2E689FE8168}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{59294366-7CCD-472D-A8FD-0DFCB4AF0383}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{C69C53AF-5A34-4EE5-BB5E-D2E689FE8168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C69C53AF-5A34-4EE5-BB5E-D2E689FE8168}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C69C53AF-5A34-4EE5-BB5E-D2E689FE8168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59294366-7CCD-472D-A8FD-0DFCB4AF0383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59294366-7CCD-472D-A8FD-0DFCB4AF0383}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59294366-7CCD-472D-A8FD-0DFCB4AF0383}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59294366-7CCD-472D-A8FD-0DFCB4AF0383}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
