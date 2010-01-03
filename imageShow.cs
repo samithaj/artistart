@@ -114,7 +114,7 @@ namespace artistArtGui
             this.indicator.Enabled = false;
             this.indicator.Text = "Downloaded";
             this.imageContainer.Click += new EventHandler(imageContainer_Click);
-
+            this.isDownloaded = true;
             ((BackgroundWorker)sender).Dispose();
         }
 
