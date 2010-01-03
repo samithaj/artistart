@@ -13,6 +13,7 @@ namespace artistArtGui
 {
     public partial class imageShow : UserControl
     {
+        public bool isDownloaded = false;
         public int idNumber;
         private string thumbUrl;
         private string originalUrl;
@@ -44,6 +45,8 @@ namespace artistArtGui
                 this.indicator.Text = "Downloaded";
                 this.indicator.Enabled = false;
                 this.imageContainer.ImageLocation = filename;
+                this.imageContainer.Click += new EventHandler(imageContainer_Click);
+                this.isDownloaded = true;
             }
             else
             {
@@ -79,7 +82,7 @@ namespace artistArtGui
             return filename;
         }
 
-        private void indicator_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        public void indicator_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             background1.WorkerReportsProgress = true;
             background1.ProgressChanged += new ProgressChangedEventHandler(background1_ProgressChanged);
@@ -112,6 +115,7 @@ namespace artistArtGui
             this.indicator.Text = "Downloaded";
             this.imageContainer.Click += new EventHandler(imageContainer_Click);
 
+            ((BackgroundWorker)sender).Dispose();
         }
 
         void imageContainer_Click(object sender, EventArgs e)
@@ -137,6 +141,7 @@ namespace artistArtGui
             string path;
             int returnValue = 0;
             WebRequest req = WebRequest.Create(url);
+            req.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable);
             WebResponse result = null;
 
             string filename = url;

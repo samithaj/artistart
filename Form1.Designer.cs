@@ -33,9 +33,13 @@
             this.number = new System.Windows.Forms.NumericUpDown();
             this.path = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.nextPagebutton = new System.Windows.Forms.Button();
+            this.artistLabel = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.artistLabel = new System.Windows.Forms.Label();
+            this.prePagebutton = new System.Windows.Forms.Button();
+            this.downThemAllbutton = new System.Windows.Forms.Button();
+            this.pageNumber = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.number)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -44,7 +48,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(391, 39);
+            this.button1.Location = new System.Drawing.Point(391, 7);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -55,7 +59,7 @@
             // artistName
             // 
             this.artistName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.artistName.Location = new System.Drawing.Point(232, 38);
+            this.artistName.Location = new System.Drawing.Point(232, 10);
             this.artistName.Name = "artistName";
             this.artistName.Size = new System.Drawing.Size(100, 20);
             this.artistName.TabIndex = 0;
@@ -63,18 +67,33 @@
             // number
             // 
             this.number.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.number.Location = new System.Drawing.Point(338, 39);
+            this.number.Location = new System.Drawing.Point(338, 10);
+            this.number.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.number.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.number.Name = "number";
             this.number.Size = new System.Drawing.Size(47, 20);
             this.number.TabIndex = 1;
+            this.number.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // path
             // 
             this.path.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.path.Location = new System.Drawing.Point(232, 13);
+            this.path.Location = new System.Drawing.Point(12, 63);
             this.path.Name = "path";
             this.path.ReadOnly = true;
-            this.path.Size = new System.Drawing.Size(234, 20);
+            this.path.Size = new System.Drawing.Size(454, 20);
             this.path.TabIndex = 3;
             this.path.Text = "Click me to Browse ";
             this.path.TextChanged += new System.EventHandler(this.path_TextChanged);
@@ -95,21 +114,48 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.pageNumber);
             this.splitContainer1.Panel2.Controls.Add(this.artistLabel);
+            this.splitContainer1.Panel2.Controls.Add(this.nextPagebutton);
+            this.splitContainer1.Panel2.Controls.Add(this.number);
+            this.splitContainer1.Panel2.Controls.Add(this.downThemAllbutton);
+            this.splitContainer1.Panel2.Controls.Add(this.artistName);
+            this.splitContainer1.Panel2.Controls.Add(this.prePagebutton);
+            this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Controls.Add(this.statusLabel);
             this.splitContainer1.Panel2.Controls.Add(this.progressBar1);
             this.splitContainer1.Panel2.Controls.Add(this.path);
-            this.splitContainer1.Panel2.Controls.Add(this.button1);
-            this.splitContainer1.Panel2.Controls.Add(this.artistName);
-            this.splitContainer1.Panel2.Controls.Add(this.number);
             this.splitContainer1.Panel2MinSize = 60;
             this.splitContainer1.Size = new System.Drawing.Size(469, 644);
-            this.splitContainer1.SplitterDistance = 575;
+            this.splitContainer1.SplitterDistance = 554;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // nextPagebutton
+            // 
+            this.nextPagebutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nextPagebutton.Location = new System.Drawing.Point(419, 34);
+            this.nextPagebutton.Name = "nextPagebutton";
+            this.nextPagebutton.Size = new System.Drawing.Size(47, 23);
+            this.nextPagebutton.TabIndex = 7;
+            this.nextPagebutton.Text = "Next";
+            this.nextPagebutton.UseVisualStyleBackColor = true;
+            this.nextPagebutton.Click += new System.EventHandler(this.nextPagebutton_Click);
+            // 
+            // artistLabel
+            // 
+            this.artistLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.artistLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.artistLabel.Location = new System.Drawing.Point(12, 7);
+            this.artistLabel.Name = "artistLabel";
+            this.artistLabel.Size = new System.Drawing.Size(198, 21);
+            this.artistLabel.TabIndex = 6;
+            this.artistLabel.Text = "Aritst";
+            this.artistLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // statusLabel
             // 
-            this.statusLabel.Location = new System.Drawing.Point(12, 28);
+            this.statusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusLabel.Location = new System.Drawing.Point(12, 27);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(198, 17);
             this.statusLabel.TabIndex = 5;
@@ -118,20 +164,40 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 48);
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.Location = new System.Drawing.Point(12, 47);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(198, 10);
             this.progressBar1.TabIndex = 4;
             // 
-            // artistLabel
+            // prePagebutton
             // 
-            this.artistLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.artistLabel.Location = new System.Drawing.Point(12, 7);
-            this.artistLabel.Name = "artistLabel";
-            this.artistLabel.Size = new System.Drawing.Size(198, 21);
-            this.artistLabel.TabIndex = 6;
-            this.artistLabel.Text = "Aritst";
-            this.artistLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.prePagebutton.Location = new System.Drawing.Point(324, 34);
+            this.prePagebutton.Name = "prePagebutton";
+            this.prePagebutton.Size = new System.Drawing.Size(48, 23);
+            this.prePagebutton.TabIndex = 9;
+            this.prePagebutton.Text = "Pre";
+            this.prePagebutton.UseVisualStyleBackColor = true;
+            this.prePagebutton.Click += new System.EventHandler(this.prePagebutton_Click);
+            // 
+            // downThemAllbutton
+            // 
+            this.downThemAllbutton.Location = new System.Drawing.Point(231, 34);
+            this.downThemAllbutton.Name = "downThemAllbutton";
+            this.downThemAllbutton.Size = new System.Drawing.Size(87, 23);
+            this.downThemAllbutton.TabIndex = 10;
+            this.downThemAllbutton.Text = "Download All";
+            this.downThemAllbutton.UseVisualStyleBackColor = true;
+            this.downThemAllbutton.Click += new System.EventHandler(this.downThemAllbutton_Click);
+            // 
+            // pageNumber
+            // 
+            this.pageNumber.Location = new System.Drawing.Point(378, 34);
+            this.pageNumber.Name = "pageNumber";
+            this.pageNumber.Size = new System.Drawing.Size(35, 23);
+            this.pageNumber.TabIndex = 11;
+            this.pageNumber.Text = "1";
+            this.pageNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -162,6 +228,10 @@
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label artistLabel;
+        private System.Windows.Forms.Button nextPagebutton;
+        private System.Windows.Forms.Button downThemAllbutton;
+        private System.Windows.Forms.Button prePagebutton;
+        private System.Windows.Forms.Label pageNumber;
     }
 }
 
