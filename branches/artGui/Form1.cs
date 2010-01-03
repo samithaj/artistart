@@ -19,34 +19,50 @@ namespace artistArtGui
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.WorkerSupportsCancellation = true;
         }
-
         public Form1(string artistIn, string pathIn, string numberIn)
         {
+
             InitializeComponent();
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.WorkerSupportsCancellation = true;
             artistName.Text = artistIn;
             pathIn = pathIn.Remove(pathIn.LastIndexOf(@"\") + 1);
 
+
+
             if (System.IO.Directory.Exists(pathIn))
                 path.Text = pathIn;
-            number.Value = int.Parse(numberIn);
-
+            if (int.Parse(numberIn) > 50)
+            {
+                MessageBox.Show("Reach limit");
+                this.number.Value = 5;
+            }
+            else
+            {
+                number.Value = int.Parse(numberIn);
+            }
             button1_Click(null, null);
 
         }
-
-
+        private int page = 1;
         public XmlDocument Artlist;
+        private int maxPage = 1;
         public ArrayList imageListCollection;
         private BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-
+        private bool isDownloading;
+        //! Cache resoult!
+        private ArrayList artistOutputArray = new ArrayList();
 
         private void button1_Click(object sender, EventArgs e)
         {
+            nextPagebutton.Enabled = false;
+            button1.Enabled = false;
+
             this.artistLabel.Text = this.artistName.Text;
             this.splitContainer1.Panel1.Controls.Clear();
             statusLabel.Text = "Fetching Artistart list...";
+            backgroundWorker1 = new BackgroundWorker();
+            backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
             backgroundWorker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker1_RunWorkerCompleted);
             backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
@@ -61,13 +77,14 @@ namespace artistArtGui
         void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
 
+
             BackgroundWorker worker = sender as BackgroundWorker;
             int x = 0, y = 0;
             Artlist = new XmlDocument();
 
             try
             {
-                string xml = downloadFromHttp.downloadTextFromHttp("http://ws.audioscrobbler.com/2.0/?method=artist.getimages&artist=" + artistName.Text + "&api_key=aa55f6dc630a531d0a093c1ca77df129&limit=" + number.Value.ToString());
+                string xml = downloadFromHttp.downloadTextFromHttp("http://ws.audioscrobbler.com/2.0/?method=artist.getimages&artist=" + artistName.Text + "&api_key=aa55f6dc630a531d0a093c1ca77df129&limit=" + number.Value.ToString() + "&page=" + page.ToString());
                 if (xml == null)
                 {
                     return;
@@ -111,31 +128,48 @@ namespace artistArtGui
             //this.ResumeLayout();
             e.Result = imageListControl;
             worker.ReportProgress(1);
+
         }
 
         void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Error != null)
             {
-
                 MessageBox.Show(e.Error.Message);
 
+                nextPagebutton.Enabled = true;
+                button1.Enabled = true;
                 return;
             }
             else if (e.Cancelled == true)
             {
+
+                nextPagebutton.Enabled = true;
+                button1.Enabled = true;
+                MessageBox.Show("Canceled!");
                 return;
             }
             else
             {
-                this.SuspendLayout();
-                foreach (imageShow im in (imageShow[])e.Result)
+                artistOutputArray.Add((imageShow[])e.Result);
+
+                if (page == maxPage)
                 {
-                    this.splitContainer1.Panel1.Controls.Add(im);
+                    this.SuspendLayout();
+                    foreach (imageShow im in (imageShow[])e.Result)
+                    {
+                        this.splitContainer1.Panel1.Controls.Add(im);
+                    }
+                    nextPagebutton.Enabled = true;
+                    button1.Enabled = true;
+                    this.ResumeLayout();
                 }
-                this.ResumeLayout();
                 this.statusLabel.Text = "Fetching Artistart list complete";
                 this.progressBar1.Value = 100;
+                this.button1.Enabled = false;
+
+                isDownloading = false;
+
             }
         }
 
@@ -152,8 +186,81 @@ namespace artistArtGui
         private void path_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.SelectedPath = this.path.Text;
             dialog.ShowDialog();
             this.path.Text = dialog.SelectedPath;
         }
+
+        private void downThemAllbutton_Click(object sender, EventArgs e)
+        {
+            foreach (imageShow showBlock in (imageShow[])artistOutputArray[page - 1])
+            {
+                if (!showBlock.isDownloaded)
+                {
+                    showBlock.indicator_LinkClicked(null, null);
+
+                }
+            }
+        }
+
+        private void nextPagebutton_Click(object sender, EventArgs e)
+        {
+            page++;
+            if (maxPage < page)
+            {
+                maxPage = page;
+            }
+            if (isDownloading && page == maxPage)
+            {
+                button1.Enabled = false;
+                nextPagebutton.Enabled = false;
+                this.pageNumber.Text = page.ToString();
+                this.SuspendLayout();
+                this.splitContainer1.Panel1.Controls.Clear();
+                this.ResumeLayout();
+                return;
+            }
+            this.pageNumber.Text = page.ToString();
+
+            if (!isDownloading && artistOutputArray.Count < maxPage)
+            {
+                isDownloading = true;
+                button1_Click(null, null);
+            }
+            else
+            {
+                this.SuspendLayout();
+                this.nextPagebutton.Enabled = true;
+                this.button1.Enabled = false;
+                this.splitContainer1.Panel1.Controls.Clear();
+                foreach (imageShow showBlock in (imageShow[])artistOutputArray[page - 1])
+                {
+                    this.splitContainer1.Panel1.Controls.Add(showBlock);
+                }
+                this.ResumeLayout();
+            }
+        }
+
+        private void prePagebutton_Click(object sender, EventArgs e)
+        {
+            nextPagebutton.Enabled = true;
+            button1.Enabled = false;
+            page--;
+            if (page < 1)
+            {
+                page = 1;
+            }
+            this.pageNumber.Text = page.ToString();
+
+            this.SuspendLayout();
+            this.splitContainer1.Panel1.Controls.Clear();
+            foreach (imageShow showBlock in (imageShow[])artistOutputArray[page - 1])
+            {
+                this.splitContainer1.Panel1.Controls.Add(showBlock);
+            }
+            this.ResumeLayout();
+        }
+
+
     }
 }

@@ -10,14 +10,16 @@ namespace artistArtGui
     static class downloadFromHttp
     {
         public static string savePath;
-        
-        
+
+
         public static string downloadTextFromHttp(string url)
         {
             WebRequest req = WebRequest.Create(url);
             WebResponse result = null;
             Stream ReceiveStream = null;
             StreamReader readerOfStream = null;
+            req.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable);
+
             try
             {
                 result = req.GetResponse();
@@ -25,8 +27,9 @@ namespace artistArtGui
                 readerOfStream = new StreamReader(ReceiveStream);
                 return readerOfStream.ReadToEnd();
             }
-            catch
+            catch (Exception err)
             {
+                System.Windows.Forms.MessageBox.Show(err.Message);
                 return null;
             }
             finally
@@ -102,7 +105,7 @@ namespace artistArtGui
         {
             WebRequest req = WebRequest.Create(url);
             WebResponse result = null;
-
+            req.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable);
             try
             {
                 result = req.GetResponse();
