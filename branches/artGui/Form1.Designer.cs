@@ -33,13 +33,13 @@
             this.number = new System.Windows.Forms.NumericUpDown();
             this.path = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.nextPagebutton = new System.Windows.Forms.Button();
+            this.pageNumber = new System.Windows.Forms.Label();
             this.artistLabel = new System.Windows.Forms.Label();
+            this.nextPagebutton = new System.Windows.Forms.Button();
+            this.downThemAllbutton = new System.Windows.Forms.Button();
+            this.prePagebutton = new System.Windows.Forms.Button();
             this.statusLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.prePagebutton = new System.Windows.Forms.Button();
-            this.downThemAllbutton = new System.Windows.Forms.Button();
-            this.pageNumber = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.number)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -130,16 +130,14 @@
             this.splitContainer1.SplitterDistance = 554;
             this.splitContainer1.TabIndex = 0;
             // 
-            // nextPagebutton
+            // pageNumber
             // 
-            this.nextPagebutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.nextPagebutton.Location = new System.Drawing.Point(419, 34);
-            this.nextPagebutton.Name = "nextPagebutton";
-            this.nextPagebutton.Size = new System.Drawing.Size(47, 23);
-            this.nextPagebutton.TabIndex = 7;
-            this.nextPagebutton.Text = "Next";
-            this.nextPagebutton.UseVisualStyleBackColor = true;
-            this.nextPagebutton.Click += new System.EventHandler(this.nextPagebutton_Click);
+            this.pageNumber.Location = new System.Drawing.Point(378, 34);
+            this.pageNumber.Name = "pageNumber";
+            this.pageNumber.Size = new System.Drawing.Size(35, 23);
+            this.pageNumber.TabIndex = 11;
+            this.pageNumber.Text = "1";
+            this.pageNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // artistLabel
             // 
@@ -151,6 +149,37 @@
             this.artistLabel.TabIndex = 6;
             this.artistLabel.Text = "Aritst";
             this.artistLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nextPagebutton
+            // 
+            this.nextPagebutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.nextPagebutton.Location = new System.Drawing.Point(419, 34);
+            this.nextPagebutton.Name = "nextPagebutton";
+            this.nextPagebutton.Size = new System.Drawing.Size(47, 23);
+            this.nextPagebutton.TabIndex = 7;
+            this.nextPagebutton.Text = "Next";
+            this.nextPagebutton.UseVisualStyleBackColor = true;
+            this.nextPagebutton.Click += new System.EventHandler(this.nextPagebutton_Click);
+            // 
+            // downThemAllbutton
+            // 
+            this.downThemAllbutton.Location = new System.Drawing.Point(231, 34);
+            this.downThemAllbutton.Name = "downThemAllbutton";
+            this.downThemAllbutton.Size = new System.Drawing.Size(87, 23);
+            this.downThemAllbutton.TabIndex = 10;
+            this.downThemAllbutton.Text = "Download All";
+            this.downThemAllbutton.UseVisualStyleBackColor = true;
+            this.downThemAllbutton.Click += new System.EventHandler(this.downThemAllbutton_Click);
+            // 
+            // prePagebutton
+            // 
+            this.prePagebutton.Location = new System.Drawing.Point(324, 34);
+            this.prePagebutton.Name = "prePagebutton";
+            this.prePagebutton.Size = new System.Drawing.Size(48, 23);
+            this.prePagebutton.TabIndex = 9;
+            this.prePagebutton.Text = "Pre";
+            this.prePagebutton.UseVisualStyleBackColor = true;
+            this.prePagebutton.Click += new System.EventHandler(this.prePagebutton_Click);
             // 
             // statusLabel
             // 
@@ -170,35 +199,6 @@
             this.progressBar1.Size = new System.Drawing.Size(198, 10);
             this.progressBar1.TabIndex = 4;
             // 
-            // prePagebutton
-            // 
-            this.prePagebutton.Location = new System.Drawing.Point(324, 34);
-            this.prePagebutton.Name = "prePagebutton";
-            this.prePagebutton.Size = new System.Drawing.Size(48, 23);
-            this.prePagebutton.TabIndex = 9;
-            this.prePagebutton.Text = "Pre";
-            this.prePagebutton.UseVisualStyleBackColor = true;
-            this.prePagebutton.Click += new System.EventHandler(this.prePagebutton_Click);
-            // 
-            // downThemAllbutton
-            // 
-            this.downThemAllbutton.Location = new System.Drawing.Point(231, 34);
-            this.downThemAllbutton.Name = "downThemAllbutton";
-            this.downThemAllbutton.Size = new System.Drawing.Size(87, 23);
-            this.downThemAllbutton.TabIndex = 10;
-            this.downThemAllbutton.Text = "Download All";
-            this.downThemAllbutton.UseVisualStyleBackColor = true;
-            this.downThemAllbutton.Click += new System.EventHandler(this.downThemAllbutton_Click);
-            // 
-            // pageNumber
-            // 
-            this.pageNumber.Location = new System.Drawing.Point(378, 34);
-            this.pageNumber.Name = "pageNumber";
-            this.pageNumber.Size = new System.Drawing.Size(35, 23);
-            this.pageNumber.TabIndex = 11;
-            this.pageNumber.Text = "1";
-            this.pageNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,7 +209,6 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "artistArtDownload(GUI)";
-            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.number)).EndInit();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();

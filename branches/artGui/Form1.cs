@@ -26,7 +26,7 @@ namespace artistArtGui
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.WorkerSupportsCancellation = true;
             artistName.Text = artistIn;
-
+            pathIn += "\\";
             //pathIn = pathIn.Remove(pathIn.LastIndexOf(@"\") + 1);
 
             if (System.IO.Directory.Exists(pathIn))
@@ -102,16 +102,20 @@ namespace artistArtGui
                 string xml = downloadFromHttp.downloadTextFromHttp("http://ws.audioscrobbler.com/2.0/?method=artist.getimages&artist=" + artistName.Text + "&api_key=aa55f6dc630a531d0a093c1ca77df129&limit=" + number.Value.ToString() + "&page=" + page.ToString());
                 if (xml == null)
                 {
+                    e.Cancel = true;
+                    e.Result = null;
+                    worker.Dispose();
                     return;
                 }
 
                 Artlist.LoadXml(xml);
             }
-            catch
+            catch (Exception err)
             {
-                this.statusLabel.Text = "Download list eror, check your network connection!";
-                MessageBox.Show("Download list eror");
+
+                MessageBox.Show(err.Message);
                 e.Cancel = true;
+                worker.Dispose();
                 return;
             }
             XmlNodeList nodeList = Artlist.GetElementsByTagName("image");
@@ -158,10 +162,11 @@ namespace artistArtGui
             }
             else if (e.Cancelled == true)
             {
-
-                nextPagebutton.Enabled = true;
+                if (page == maxPage)
+                    nextPagebutton.Enabled = false;
                 button1.Enabled = true;
-                MessageBox.Show("Canceled!");
+
+                //MessageBox.Show("Canceled!");
                 return;
             }
             else
@@ -190,7 +195,7 @@ namespace artistArtGui
 
         private void path_TextChanged(object sender, EventArgs e)
         {
-            downloadFromHttp.savePath = this.path.Text;
+            downloadFromHttp.savePath = this.path.Text + "\\";
         }
 
         public static void getProgress(string stuts, int percentage)
