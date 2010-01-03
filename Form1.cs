@@ -26,12 +26,27 @@ namespace artistArtGui
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.WorkerSupportsCancellation = true;
             artistName.Text = artistIn;
-            pathIn = pathIn.Remove(pathIn.LastIndexOf(@"\") + 1);
 
-
+            //pathIn = pathIn.Remove(pathIn.LastIndexOf(@"\") + 1);
 
             if (System.IO.Directory.Exists(pathIn))
+            {
                 path.Text = pathIn;
+            }
+            else
+            {
+                try
+                {
+                    path.Text = pathIn;
+                    System.IO.Directory.CreateDirectory(path.Text);
+
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+            }
+
             if (int.Parse(numberIn) > 50)
             {
                 MessageBox.Show("Reach limit");
