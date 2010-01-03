@@ -34,7 +34,7 @@ namespace art
             Artlist = new XmlDocument();
 
             WebRequest req = WebRequest.Create("http://ws.audioscrobbler.com/2.0/?method=artist.getimages&artist=" + artistName + "&api_key=aa55f6dc630a531d0a093c1ca77df129&limit=" + limit);
-
+            req.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable);
             try
             {
                 WebResponse result = req.GetResponse();
@@ -99,6 +99,7 @@ namespace art
                         try
                         {
                             req = WebRequest.Create(urlList[j].ToString());
+                            req.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable);
                             resoult = req.GetResponse();
                             SaveBinaryFile(resoult, src);
                         }
