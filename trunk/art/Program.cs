@@ -11,17 +11,29 @@ namespace art
             if (args.GetLength(0) != 3)
             {
                 Console.WriteLine(
-                    "Help: art.exe <artist> <path> <images> \r\n!important:path must include filename,or downloaded images will be somewhere else. \r\nWhy:%path% is easier for foobar than $replace(%path%,%filename_ext%,)\r\nPress any key to close."
+                    "Help: art.exe <artist> <path> <images> \r\nPress any key to close."
                     );
                 Console.ReadKey();
                 return;
             }
 
             fetchArtists itFetch;
-            string path = args[1];
+            string path = args[1] + "\\";
 
-            path = args[1].Remove(args[1].LastIndexOf(@"\") + 1);
+            //path = args[1].Remove(args[1].LastIndexOf(@"\") + 1);
+            if (!System.IO.Directory.Exists(path))
+            {
+                try
+                {
+                    System.IO.Directory.CreateDirectory(path);
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(err.Message);
+                    return;
+                }
 
+            }
             if (args.GetLength(0) >= 1)
                 itFetch = new fetchArtists(args[0], path, args[2]);
             else
