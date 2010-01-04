@@ -296,7 +296,7 @@ namespace artistArtGui
         }
 
         //Enable mouse scrolling.
-        private void splitContainer1_Panel1_Click(object sender, EventArgs e)
+        private void splitContainer1_Panel1_MouseEnter(object sender, EventArgs e)
         {
             splitContainer1.Panel1.Focus();
         }
