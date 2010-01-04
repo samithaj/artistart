@@ -13,35 +13,36 @@ namespace artistArtGui
 {
     public partial class imageShow : UserControl
     {
-        public bool isDownloaded = false;
-        public int idNumber;
-        private string thumbUrl;
-        private string originalUrl;
-        private string artistName;
-        private BackgroundWorker background1 = new BackgroundWorker();
-        private ProgressBar progressBar1;
+        //Constructors
         public imageShow()
         {
         }
-
         public imageShow(int id, string small, string original, string artist)
         {
             InitializeComponent();
-            idNumber = id;
-
             thumbUrl = small;
             originalUrl = original;
             artistName = artist;
             updateStatus();
         }
 
+        //Properties
+        public bool isDownloaded = false;//Image downloaded?
+        private string thumbUrl;//Preview Url
+        private string originalUrl;//Image Url
+        private string artistName;//Artist Name
+        private BackgroundWorker background1 = new BackgroundWorker();//Enable multiThreading
+        private ProgressBar progressBar1;//Progress Bar.Announced Here for dynamic display.
+
+        //Methods
+
+        //Update image status, is it downloaded?
         public void updateStatus()
         {
             string filename = getPath();
-
+            //If downloaded, use local file for displaying
             if (File.Exists(filename))
             {
-
                 this.indicator.Text = "Downloaded";
                 this.indicator.Enabled = false;
                 this.imageContainer.ImageLocation = filename;
@@ -49,9 +50,10 @@ namespace artistArtGui
                 this.isDownloaded = true;
             }
             else
+            //Not downloaded
             {
+                //Add progress bar
                 this.SuspendLayout();
-
                 progressBar1 = new ProgressBar();
                 progressBar1.Location = new System.Drawing.Point(5, 138);
                 progressBar1.Name = "progressBar1";
@@ -59,8 +61,8 @@ namespace artistArtGui
                 progressBar1.TabIndex = 3;
                 progressBar1.Maximum = 100;
                 Controls.Add(progressBar1);
-
                 this.ResumeLayout();
+                //Download previews
                 try
                 {
                     this.imageContainer.Image = Image.FromStream(downloadFromHttp.downloadThumb(thumbUrl));
@@ -73,6 +75,8 @@ namespace artistArtGui
             }
         }
 
+        //Get path from static class DownloadFromHttp
+        //and create the full file path
         private string getPath()
         {
             string filename;
@@ -82,6 +86,7 @@ namespace artistArtGui
             return filename;
         }
 
+        //Download button clicked
         public void indicator_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             background1.WorkerReportsProgress = true;
@@ -93,8 +98,10 @@ namespace artistArtGui
             background1.RunWorkerAsync();
         }
 
+        //Progress bar update.
         void background1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            ////Test returned value
             //if (e.ProgressPercentage > 100)
             //{
             //    MessageBox.Show("Over");
@@ -103,6 +110,7 @@ namespace artistArtGui
             this.progressBar1.Value = e.ProgressPercentage;
         }
 
+        //Downloading completes and update the preview.
         void background1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Error != null)
@@ -118,6 +126,7 @@ namespace artistArtGui
             ((BackgroundWorker)sender).Dispose();
         }
 
+        //Open downloaded file when clicked
         void imageContainer_Click(object sender, EventArgs e)
         {
             try
@@ -130,6 +139,7 @@ namespace artistArtGui
             }
         }
 
+        //Download image in another thread.
         void background1_DoWork(object sender, DoWorkEventArgs e)
         {
             downloadImageFromHttp(originalUrl, artistName, background1);
@@ -141,17 +151,25 @@ namespace artistArtGui
             string path;
             int returnValue = 0;
             WebRequest req = WebRequest.Create(url);
+
+            //this is for my testing..I have a very poor Internet connection.
             req.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable);
+            //cache end.
+
             WebResponse result = null;
 
+            //Get identical number frome server and build filename 
             string filename = url;
             filename = filename.ToString().Remove(filename.ToString().LastIndexOf("/"));
             filename = filename.Remove(0, filename.LastIndexOf("/") + 1);
             path = downloadFromHttp.savePath + prefix + "_" + filename + ".jpg";
+
             try
             {
                 result = req.GetResponse();
                 long size = result.ContentLength;
+
+                //Test if file exists again.
                 if (File.Exists(downloadFromHttp.savePath)) return 0;
 
                 bool value = false;

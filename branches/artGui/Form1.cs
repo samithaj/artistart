@@ -13,6 +13,7 @@ namespace artistArtGui
 {
     public partial class Form1 : Form
     {
+        //Contructors
         public Form1()
         {
             InitializeComponent();
@@ -21,14 +22,19 @@ namespace artistArtGui
         }
         public Form1(string artistIn, string pathIn, string numberIn)
         {
-
             InitializeComponent();
+
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.WorkerSupportsCancellation = true;
+
             artistName.Text = artistIn;
             pathIn += "\\";
+
+            //<path> parameter is changed here to use STANDARD DIRECTORY PATH
             //pathIn = pathIn.Remove(pathIn.LastIndexOf(@"\") + 1);
 
+            //Judge path or create path
+            #region
             if (System.IO.Directory.Exists(pathIn))
             {
                 path.Text = pathIn;
@@ -46,28 +52,36 @@ namespace artistArtGui
                     MessageBox.Show(err.Message);
                 }
             }
+            #endregion
 
             if (int.Parse(numberIn) > 50)
             {
-                MessageBox.Show("Reach limit");
+                MessageBox.Show("50 limit reached.!");
                 this.number.Value = 5;
             }
             else
             {
                 number.Value = int.Parse(numberIn);
             }
+
+            //Perform simulating click action
             button1_Click(null, null);
 
         }
+
+        //Properties
         private int page = 1;
         public XmlDocument Artlist;
-        private int maxPage = 1;
-        public ArrayList imageListCollection;
-        private BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-        private bool isDownloading;
-        //! Cache resoult!
-        private ArrayList artistOutputArray = new ArrayList();
+        private int maxPage = 1;//The max page you have fetched from server.
+        public ArrayList imageListCollection;//One page's imageShow controls.
+        private BackgroundWorker backgroundWorker1 = new BackgroundWorker();//multithreading
+        private bool isDownloading;//Is a page fetching?
 
+        //! Cache resoult!
+        private ArrayList artistOutputArray = new ArrayList();//Fetched Pages.
+
+
+        //Methods
         private void button1_Click(object sender, EventArgs e)
         {
             nextPagebutton.Enabled = false;
@@ -84,19 +98,18 @@ namespace artistArtGui
             backgroundWorker1.RunWorkerAsync();
         }
 
+        //Progress Report
         void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
 
+        //Fetch page in another thread.
         void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-
-
             BackgroundWorker worker = sender as BackgroundWorker;
             int x = 0, y = 0;
             Artlist = new XmlDocument();
-
             try
             {
                 string xml = downloadFromHttp.downloadTextFromHttp("http://ws.audioscrobbler.com/2.0/?method=artist.getimages&artist=" + artistName.Text + "&api_key=aa55f6dc630a531d0a093c1ca77df129&limit=" + number.Value.ToString() + "&page=" + page.ToString());
@@ -112,7 +125,7 @@ namespace artistArtGui
             }
             catch (Exception err)
             {
-
+                //Cancel thread and throw a window;
                 MessageBox.Show(err.Message);
                 e.Cancel = true;
                 worker.Dispose();
@@ -121,7 +134,7 @@ namespace artistArtGui
             XmlNodeList nodeList = Artlist.GetElementsByTagName("image");
 
             imageShow[] imageListControl = new imageShow[nodeList.Count];
-            //this.SuspendLayout();
+
             for (int i = 0; i < nodeList.Count; i++)
             {
                 imageListControl[i] = new imageShow(i,
@@ -136,26 +149,24 @@ namespace artistArtGui
                 }
                 imageListControl[i].Location = new Point(x, y);
                 x += 150;
-
                 imageListControl[i].Name = "imageList" + i.ToString();
                 imageListControl[i].Size = new Size(150, 150);
 
-                //this.splitContainer1.Panel1.Controls.Add(imageListControl[i]);
-
                 imageListControl[i].Show();
             }
-            //this.ResumeLayout();
+
             e.Result = imageListControl;
             worker.ReportProgress(1);
 
         }
 
+        //When page is fetched from server
         void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            //Is there a error or is process canceled?
             if (e.Error != null)
             {
                 MessageBox.Show(e.Error.Message);
-
                 nextPagebutton.Enabled = true;
                 button1.Enabled = true;
                 return;
@@ -169,10 +180,14 @@ namespace artistArtGui
                 //MessageBox.Show("Canceled!");
                 return;
             }
+            //Everythins is solid, then 
             else
             {
+                //Add fetched page to artistOutputArray
+
                 artistOutputArray.Add((imageShow[])e.Result);
 
+                //If current page is the new downloaded page,then show it
                 if (page == maxPage)
                 {
                     this.SuspendLayout();
@@ -189,20 +204,16 @@ namespace artistArtGui
                 this.button1.Enabled = false;
 
                 isDownloading = false;
-
             }
         }
 
+        //Change save path when path textBox changed.
         private void path_TextChanged(object sender, EventArgs e)
         {
             downloadFromHttp.savePath = this.path.Text + "\\";
         }
 
-        public static void getProgress(string stuts, int percentage)
-        {
-
-        }
-
+        //Display a folder browser dialog.
         private void path_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
@@ -211,6 +222,7 @@ namespace artistArtGui
             this.path.Text = dialog.SelectedPath;
         }
 
+        //Download them all.
         private void downThemAllbutton_Click(object sender, EventArgs e)
         {
             foreach (imageShow showBlock in (imageShow[])artistOutputArray[page - 1])
@@ -223,6 +235,7 @@ namespace artistArtGui
             }
         }
 
+        //Next page button
         private void nextPagebutton_Click(object sender, EventArgs e)
         {
             page++;
@@ -261,6 +274,7 @@ namespace artistArtGui
             }
         }
 
+        //Previous page button
         private void prePagebutton_Click(object sender, EventArgs e)
         {
             nextPagebutton.Enabled = true;
@@ -280,6 +294,14 @@ namespace artistArtGui
             }
             this.ResumeLayout();
         }
+
+        //Enable mouse scrolling.
+        private void splitContainer1_Panel1_Click(object sender, EventArgs e)
+        {
+            splitContainer1.Panel1.Focus();
+        }
+
+
 
 
     }

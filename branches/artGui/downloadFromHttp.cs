@@ -11,14 +11,19 @@ namespace artistArtGui
     {
         public static string savePath;
 
-
+        //Download text file containing image addresses from Server.
+        //Here used to download the XML file containing images' addresses.
         public static string downloadTextFromHttp(string url)
         {
             WebRequest req = WebRequest.Create(url);
             WebResponse result = null;
             Stream ReceiveStream = null;
             StreamReader readerOfStream = null;
+
+            //this is for my testing..I have a very poor Internet connection.
             req.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable);
+            //cache end.
+
 
             try
             {
@@ -40,35 +45,40 @@ namespace artistArtGui
 
         }
 
-        //public static int downloadImageFromHttp(string url, string prefix )
-        //{
-        //    string path;
-        //    int returnValue = 0;
-        //    WebRequest req = WebRequest.Create(url);
-        //    WebResponse result = null;
+        //Download image from server, code moved to imageShow class
+        /*
+        public static int downloadImageFromHttp(string url, string prefix )
+        {
+            string path;
+            int returnValue = 0;
+            WebRequest req = WebRequest.Create(url);
+            WebResponse result = null;
 
-        //    string filename = url;
-        //    filename = filename.ToString().Remove(filename.ToString().LastIndexOf("/"));
-        //    filename = filename.Remove(0, filename.LastIndexOf("/") + 1);
-        //    path = savePath + prefix + "_" + filename + ".jpg";
-        //    try
-        //    {
-        //        result = req.GetResponse();
-        //        if (File.Exists(savePath)) return 0;
-        //        if (SaveBinaryFile(result, path)) returnValue = 1;
-        //    }
-        //    catch
-        //    {
-        //        returnValue = -1;
-        //    }
-        //    finally
-        //    {
-        //        if (result != null) result.Close();
-        //    }
-        //    return returnValue;
+            string filename = url;
+            filename = filename.ToString().Remove(filename.ToString().LastIndexOf("/"));
+            filename = filename.Remove(0, filename.LastIndexOf("/") + 1);
+            path = savePath + prefix + "_" + filename + ".jpg";
+            try
+            {
+                result = req.GetResponse();
+                if (File.Exists(savePath)) return 0;
+                if (SaveBinaryFile(result, path)) returnValue = 1;
+            }
+            catch
+            {
+                returnValue = -1;
+            }
+            finally
+            {
+                if (result != null) result.Close();
+            }
+            return returnValue;
 
-        //}
+        }
+        */
 
+        //Save file.code moved to imageShow class
+        /*
         private static bool SaveBinaryFile(WebResponse response, string savePath)
         {
             bool value = false;
@@ -100,7 +110,9 @@ namespace artistArtGui
 
             return value;
         }
+        */
 
+        //Download small previews, return Stream class for Image.
         public static Stream downloadThumb(string url)
         {
             WebRequest req = WebRequest.Create(url);
@@ -116,5 +128,7 @@ namespace artistArtGui
                 return null;
             }
         }
+
+
     }
 }

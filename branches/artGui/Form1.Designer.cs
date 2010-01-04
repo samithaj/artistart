@@ -59,9 +59,9 @@
             // artistName
             // 
             this.artistName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.artistName.Location = new System.Drawing.Point(232, 10);
+            this.artistName.Location = new System.Drawing.Point(233, 10);
             this.artistName.Name = "artistName";
-            this.artistName.Size = new System.Drawing.Size(100, 20);
+            this.artistName.Size = new System.Drawing.Size(99, 20);
             this.artistName.TabIndex = 0;
             // 
             // number
@@ -90,7 +90,7 @@
             // path
             // 
             this.path.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.path.Location = new System.Drawing.Point(12, 63);
+            this.path.Location = new System.Drawing.Point(12, 60);
             this.path.Name = "path";
             this.path.ReadOnly = true;
             this.path.Size = new System.Drawing.Size(454, 20);
@@ -111,6 +111,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.AutoScroll = true;
+            this.splitContainer1.Panel1.Click += new System.EventHandler(this.splitContainer1_Panel1_Click);
             // 
             // splitContainer1.Panel2
             // 
@@ -132,9 +133,9 @@
             // 
             // pageNumber
             // 
-            this.pageNumber.Location = new System.Drawing.Point(378, 34);
+            this.pageNumber.Location = new System.Drawing.Point(380, 34);
             this.pageNumber.Name = "pageNumber";
-            this.pageNumber.Size = new System.Drawing.Size(35, 23);
+            this.pageNumber.Size = new System.Drawing.Size(33, 23);
             this.pageNumber.TabIndex = 11;
             this.pageNumber.Text = "1";
             this.pageNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -163,7 +164,7 @@
             // 
             // downThemAllbutton
             // 
-            this.downThemAllbutton.Location = new System.Drawing.Point(231, 34);
+            this.downThemAllbutton.Location = new System.Drawing.Point(233, 34);
             this.downThemAllbutton.Name = "downThemAllbutton";
             this.downThemAllbutton.Size = new System.Drawing.Size(87, 23);
             this.downThemAllbutton.TabIndex = 10;
@@ -173,7 +174,7 @@
             // 
             // prePagebutton
             // 
-            this.prePagebutton.Location = new System.Drawing.Point(324, 34);
+            this.prePagebutton.Location = new System.Drawing.Point(326, 34);
             this.prePagebutton.Name = "prePagebutton";
             this.prePagebutton.Size = new System.Drawing.Size(48, 23);
             this.prePagebutton.TabIndex = 9;
