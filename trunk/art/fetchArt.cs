@@ -91,7 +91,7 @@ namespace art
                     string filenamePrefix = artistName;
                     foreach (char invalidChar in Path.GetInvalidFileNameChars())
                     {
-                        filenamePrefix = filenamePrefix.Replace(invalidChar, '\0');
+                        filenamePrefix = filenamePrefix.Replace(invalidChar, '-');
                     }
 
                     src = path + filenamePrefix + "_" + filename + ".jpg";
