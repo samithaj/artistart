@@ -15,10 +15,10 @@ namespace artistArtGui
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             if (args.Length == 3)
-                Application.Run(new Form1(args[0], args[1], args[2]));
+                Application.Run(new Mainform(args[0], args[1], args[2]));
             else
             {
-                Application.Run(new Form1());
+                Application.Run(new Mainform());
             }
         }
 
