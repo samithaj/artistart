@@ -29,11 +29,11 @@ namespace art
 
         public int fetchArtList()
         {
-
             if (artistName == null) return -2;
             Artlist = new XmlDocument();
-
-            WebRequest req = WebRequest.Create("http://ws.audioscrobbler.com/2.0/?method=artist.getimages&artist=" + artistName + "&api_key=aa55f6dc630a531d0a093c1ca77df129&limit=" + limit);
+            WebRequest req = WebRequest.Create(
+                "http://ws.audioscrobbler.com/2.0/?method=artist.getimages&artist=" + artistName + "&api_key=aa55f6dc630a531d0a093c1ca77df129&limit=" + limit
+                );
             req.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable);
             try
             {
@@ -50,11 +50,7 @@ namespace art
                 Console.ReadKey();
                 return -1;
             }
-
-
-
             XmlNodeList nodeList = Artlist.GetElementsByTagName("size");
-
             urlList = new ArrayList();
             for (int i = 0; i < nodeList.Count; i++)
             {
@@ -91,15 +87,27 @@ namespace art
                     filename = urlList[j].ToString();
                     filename = filename.ToString().Remove(filename.ToString().LastIndexOf("/"));
                     filename = filename.Remove(0, filename.LastIndexOf("/") + 1);
-                    src = path + artistName + "_" + filename + ".jpg";
+
+                    string filenamePrefix = artistName;
+                    foreach (char invalidChar in Path.GetInvalidFileNameChars())
+                    {
+                        filenamePrefix = filenamePrefix.Replace(invalidChar, '\0');
+                    }
+
+                    src = path + filenamePrefix + "_" + filename + ".jpg";
                     Console.Write("\r\nfetching " + j.ToString() + " to " + src);
 
                     if (!File.Exists(src))
                     {
                         try
                         {
-                            req = WebRequest.Create(urlList[j].ToString());
+                            req = WebRequest.Create(
+                                urlList[j].ToString()
+
+                                );
+
                             req.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable);
+
                             resoult = req.GetResponse();
                             SaveBinaryFile(resoult, src);
                         }
