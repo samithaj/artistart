@@ -94,7 +94,7 @@ namespace artistArtGui
             string filename;
             filename = originalUrl.ToString().Remove(originalUrl.ToString().LastIndexOf("/"));
             filename = filename.Remove(0, filename.LastIndexOf("/") + 1);
-            filename = downloadFromHttp.savePath + artistName + "_" + filename + ".jpg";
+            filename = downloadFromHttp.savePath + artistName + "_" + filename + Path.GetExtension(originalUrl);
             return filename;
         }
 
@@ -190,7 +190,7 @@ namespace artistArtGui
             {
                 filenamePrefix = filenamePrefix.Replace(invalidChar, '-');
             }
-            path = downloadFromHttp.savePath + filenamePrefix + "_" + identifier + ".jpg";
+            path = downloadFromHttp.savePath + filenamePrefix + "_" + identifier + Path.GetExtension(originalUrl);
             //MessageBox.Show(path);
             long size = 0;
 
