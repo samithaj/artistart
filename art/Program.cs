@@ -45,6 +45,7 @@ namespace art
             {
                 return;
             }
+
             itFetch.output();
 
             itFetch.saveImage();
