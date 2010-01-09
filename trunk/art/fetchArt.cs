@@ -94,7 +94,8 @@ namespace art
                         filenamePrefix = filenamePrefix.Replace(invalidChar, '-');
                     }
 
-                    src = path + filenamePrefix + "_" + filename + ".jpg";
+                    src = Path.Combine(path, filenamePrefix + "_" + filename + Path.GetExtension(urlList[j].ToString()));
+
                     Console.Write("\r\nfetching " + j.ToString() + " to " + src);
 
                     if (!File.Exists(src))
