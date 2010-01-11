@@ -23,5 +23,5 @@ lastFmArtist.exe /artist [aritstname] /num [number of images per page] /path [sa
 
 Can set multiple artists to [artistname] like
 {{{
-lastFmArtist.exe /artist "paramore" "taylor swift" /num 10 /path "paramore"
+lastFmArtist.exe /artist "paramore" "taylor swift" /num 10 /path "f:\artistart"
 }}}
