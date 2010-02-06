@@ -99,14 +99,14 @@ namespace lastFmArtist
 
 
                 this.Controls.Remove(this.progressBar1);
-                this.SuspendLayout();
                 progressBar1 = new ProgressBar();
-                progressBar1.Location = new System.Drawing.Point(5, 138);
+                progressBar1.Location = new System.Drawing.Point(3, 124);
                 progressBar1.Name = "progressBar1";
-                progressBar1.Size = new System.Drawing.Size(68, 10);
+                progressBar1.Size = new System.Drawing.Size(75, 10);
                 progressBar1.TabIndex = 3;
                 progressBar1.Maximum = 100;
-
+                progressBar1.Anchor = AnchorStyles.Top;
+                this.SuspendLayout();
                 this.Controls.Add(progressBar1);
                 this.ResumeLayout();
 
