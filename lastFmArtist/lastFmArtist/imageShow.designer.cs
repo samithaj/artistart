@@ -37,20 +37,19 @@
             // 
             this.imageContainer.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.imageContainer.Location = new System.Drawing.Point(3, 3);
-            this.imageContainer.MaximumSize = new System.Drawing.Size(144, 118);
-            this.imageContainer.MinimumSize = new System.Drawing.Size(144, 118);
+            this.imageContainer.MaximumSize = new System.Drawing.Size(144, 128);
+            this.imageContainer.MinimumSize = new System.Drawing.Size(144, 128);
             this.imageContainer.Name = "imageContainer";
-            this.imageContainer.Size = new System.Drawing.Size(144, 118);
+            this.imageContainer.Size = new System.Drawing.Size(144, 128);
             this.imageContainer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imageContainer.TabIndex = 0;
             this.imageContainer.TabStop = false;
             // 
             // indicator
             // 
-            this.indicator.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.indicator.Location = new System.Drawing.Point(78, 122);
+            this.indicator.Location = new System.Drawing.Point(79, 131);
             this.indicator.Name = "indicator";
-            this.indicator.Size = new System.Drawing.Size(69, 15);
+            this.indicator.Size = new System.Drawing.Size(69, 16);
             this.indicator.TabIndex = 1;
             this.indicator.TabStop = true;
             this.indicator.Text = "Download";
@@ -59,13 +58,12 @@
             // 
             // imageShow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.indicator);
             this.Controls.Add(this.imageContainer);
             this.Name = "imageShow";
-            this.Size = new System.Drawing.Size(150, 142);
             ((System.ComponentModel.ISupportInitialize)(this.imageContainer)).EndInit();
             this.ResumeLayout(false);
 
