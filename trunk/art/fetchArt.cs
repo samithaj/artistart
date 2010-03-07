@@ -19,7 +19,7 @@ namespace art
 
         public fetchArtists(string artist, string outpath, string max)
         {
-            artistName = artist;
+            artistName = System.Web.HttpUtility.UrlEncode(artist);
             path = outpath;
             limit = max;
         }
@@ -108,7 +108,7 @@ namespace art
                                 );
 
                             req.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.CacheIfAvailable);
-
+                            req.Timeout = 60000;
                             resoult = req.GetResponse();
                             SaveBinaryFile(resoult, src);
                         }
