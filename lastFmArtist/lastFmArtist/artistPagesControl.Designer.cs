@@ -66,8 +66,8 @@
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
-            this.splitContainer1.Size = new System.Drawing.Size(749, 467);
-            this.splitContainer1.SplitterDistance = 429;
+            this.splitContainer1.Size = new System.Drawing.Size(749, 506);
+            this.splitContainer1.SplitterDistance = 468;
             this.splitContainer1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -76,7 +76,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(749, 429);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(749, 468);
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.Click += new System.EventHandler(this.flowLayoutPanel1_Click);
             this.flowLayoutPanel1.MouseEnter += new System.EventHandler(this.flowLayoutPanel1_Click);
@@ -87,17 +87,17 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(5, 10, 5, 0);
+            this.panel2.Padding = new System.Windows.Forms.Padding(5, 11, 5, 0);
             this.panel2.Size = new System.Drawing.Size(385, 34);
             this.panel2.TabIndex = 8;
             // 
             // artistImagePathtextBox
             // 
             this.artistImagePathtextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.artistImagePathtextBox.Location = new System.Drawing.Point(5, 10);
+            this.artistImagePathtextBox.Location = new System.Drawing.Point(5, 11);
             this.artistImagePathtextBox.Name = "artistImagePathtextBox";
             this.artistImagePathtextBox.ReadOnly = true;
-            this.artistImagePathtextBox.Size = new System.Drawing.Size(375, 21);
+            this.artistImagePathtextBox.Size = new System.Drawing.Size(375, 20);
             this.artistImagePathtextBox.TabIndex = 7;
             this.artistImagePathtextBox.Text = "Specify Path..! Will Not Save To Library!";
             this.artistImagePathtextBox.Click += new System.EventHandler(this.artistImagePathtextBox_Click);
@@ -120,9 +120,9 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(346, 10);
+            this.button1.Location = new System.Drawing.Point(346, 8);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(15, 21);
+            this.button1.Size = new System.Drawing.Size(15, 23);
             this.button1.TabIndex = 6;
             this.button1.Text = ">";
             this.button1.UseVisualStyleBackColor = true;
@@ -131,9 +131,9 @@
             // downloadAllbtn
             // 
             this.downloadAllbtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.downloadAllbtn.Location = new System.Drawing.Point(128, 11);
+            this.downloadAllbtn.Location = new System.Drawing.Point(128, 9);
             this.downloadAllbtn.Name = "downloadAllbtn";
-            this.downloadAllbtn.Size = new System.Drawing.Size(90, 21);
+            this.downloadAllbtn.Size = new System.Drawing.Size(90, 23);
             this.downloadAllbtn.TabIndex = 3;
             this.downloadAllbtn.Text = "Download All";
             this.downloadAllbtn.UseVisualStyleBackColor = true;
@@ -142,9 +142,9 @@
             // pageStatus
             // 
             this.pageStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pageStatus.Location = new System.Drawing.Point(13, 9);
+            this.pageStatus.Location = new System.Drawing.Point(13, 7);
             this.pageStatus.Name = "pageStatus";
-            this.pageStatus.Size = new System.Drawing.Size(109, 12);
+            this.pageStatus.Size = new System.Drawing.Size(109, 13);
             this.pageStatus.TabIndex = 5;
             this.pageStatus.Text = "Idle";
             this.pageStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -152,9 +152,9 @@
             // nextBtn
             // 
             this.nextBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.nextBtn.Location = new System.Drawing.Point(300, 11);
+            this.nextBtn.Location = new System.Drawing.Point(300, 9);
             this.nextBtn.Name = "nextBtn";
-            this.nextBtn.Size = new System.Drawing.Size(40, 21);
+            this.nextBtn.Size = new System.Drawing.Size(40, 23);
             this.nextBtn.TabIndex = 0;
             this.nextBtn.Text = "Next";
             this.nextBtn.UseVisualStyleBackColor = true;
@@ -163,17 +163,17 @@
             // progressBar1
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(13, 23);
+            this.progressBar1.Location = new System.Drawing.Point(13, 22);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(109, 10);
+            this.progressBar1.Size = new System.Drawing.Size(109, 11);
             this.progressBar1.TabIndex = 4;
             // 
             // preBtn
             // 
             this.preBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.preBtn.Location = new System.Drawing.Point(224, 11);
+            this.preBtn.Location = new System.Drawing.Point(224, 9);
             this.preBtn.Name = "preBtn";
-            this.preBtn.Size = new System.Drawing.Size(40, 21);
+            this.preBtn.Size = new System.Drawing.Size(40, 23);
             this.preBtn.TabIndex = 1;
             this.preBtn.Text = "Pre";
             this.preBtn.UseVisualStyleBackColor = true;
@@ -182,21 +182,21 @@
             // pageNumberLabel
             // 
             this.pageNumberLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pageNumberLabel.Location = new System.Drawing.Point(270, 11);
+            this.pageNumberLabel.Location = new System.Drawing.Point(270, 9);
             this.pageNumberLabel.Name = "pageNumberLabel";
-            this.pageNumberLabel.Size = new System.Drawing.Size(24, 21);
+            this.pageNumberLabel.Size = new System.Drawing.Size(24, 23);
             this.pageNumberLabel.TabIndex = 2;
             this.pageNumberLabel.Text = "1";
             this.pageNumberLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // artistPagesControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer1);
-            this.MinimumSize = new System.Drawing.Size(150, 185);
+            this.MinimumSize = new System.Drawing.Size(150, 200);
             this.Name = "artistPagesControl";
-            this.Size = new System.Drawing.Size(749, 467);
+            this.Size = new System.Drawing.Size(749, 506);
             this.Load += new System.EventHandler(this.artistPagesControl_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

@@ -39,26 +39,26 @@
             this.artistWikiPanel = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.libraryBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.withWikiCheckBox = new System.Windows.Forms.CheckBox();
             this.modChangeGroupBox = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.localRadioButton = new System.Windows.Forms.RadioButton();
             this.allImageradioButton = new System.Windows.Forms.RadioButton();
             this.pageHaveImagesNumber = new System.Windows.Forms.NumericUpDown();
             this.artistNameTXB = new System.Windows.Forms.TextBox();
             this.searchBTN = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.libraryBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.artistWikiPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.modChangeGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageHaveImagesNumber)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -81,7 +81,7 @@
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(0, 0, 3, 3);
             this.splitContainer1.Panel2MinSize = 0;
             this.splitContainer1.Size = new System.Drawing.Size(662, 373);
-            this.splitContainer1.SplitterDistance = 499;
+            this.splitContainer1.SplitterDistance = 500;
             this.splitContainer1.TabIndex = 0;
             // 
             // artistTabPage
@@ -90,7 +90,7 @@
             this.artistTabPage.Location = new System.Drawing.Point(0, 0);
             this.artistTabPage.Name = "artistTabPage";
             this.artistTabPage.SelectedIndex = 0;
-            this.artistTabPage.Size = new System.Drawing.Size(499, 373);
+            this.artistTabPage.Size = new System.Drawing.Size(500, 373);
             this.artistTabPage.TabIndex = 0;
             this.artistTabPage.DoubleClick += new System.EventHandler(this.artistTabPage_DoubleClick);
             this.artistTabPage.SelectedIndexChanged += new System.EventHandler(this.artistTabPage_SelectedIndexChanged);
@@ -101,7 +101,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox2.Location = new System.Drawing.Point(0, 325);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(156, 45);
+            this.groupBox2.Size = new System.Drawing.Size(155, 45);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Download Status";
@@ -112,7 +112,7 @@
             this.downloadingNumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.downloadingNumLabel.Location = new System.Drawing.Point(3, 16);
             this.downloadingNumLabel.Name = "downloadingNumLabel";
-            this.downloadingNumLabel.Size = new System.Drawing.Size(150, 26);
+            this.downloadingNumLabel.Size = new System.Drawing.Size(149, 26);
             this.downloadingNumLabel.TabIndex = 0;
             this.downloadingNumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -123,7 +123,7 @@
             this.artistWikiPanel.Location = new System.Drawing.Point(0, 233);
             this.artistWikiPanel.Name = "artistWikiPanel";
             this.artistWikiPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.artistWikiPanel.Size = new System.Drawing.Size(156, 137);
+            this.artistWikiPanel.Size = new System.Drawing.Size(155, 137);
             this.artistWikiPanel.TabIndex = 1;
             this.artistWikiPanel.TabStop = false;
             this.artistWikiPanel.Text = "Artist Summary";
@@ -137,7 +137,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(146, 114);
+            this.textBox1.Size = new System.Drawing.Size(145, 114);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "Double Clicks to Change Font";
             this.textBox1.DoubleClick += new System.EventHandler(this.textBox1_DoubleClick);
@@ -153,44 +153,10 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(156, 233);
+            this.groupBox1.Size = new System.Drawing.Size(155, 233);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Go!";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.libraryBtn);
-            this.groupBox3.Controls.Add(this.button1);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(3, 150);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(150, 80);
-            this.groupBox3.TabIndex = 4;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Library";
-            // 
-            // libraryBtn
-            // 
-            this.libraryBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.libraryBtn.Location = new System.Drawing.Point(7, 51);
-            this.libraryBtn.Name = "libraryBtn";
-            this.libraryBtn.Size = new System.Drawing.Size(137, 23);
-            this.libraryBtn.TabIndex = 2;
-            this.libraryBtn.Text = "Load Library Directory";
-            this.libraryBtn.UseVisualStyleBackColor = true;
-            this.libraryBtn.Click += new System.EventHandler(this.libraryBtn_Click);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(7, 22);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(137, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Display All Artists";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // withWikiCheckBox
             // 
@@ -210,10 +176,20 @@
             this.modChangeGroupBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.modChangeGroupBox.Location = new System.Drawing.Point(3, 79);
             this.modChangeGroupBox.Name = "modChangeGroupBox";
-            this.modChangeGroupBox.Size = new System.Drawing.Size(150, 71);
+            this.modChangeGroupBox.Size = new System.Drawing.Size(149, 71);
             this.modChangeGroupBox.TabIndex = 5;
             this.modChangeGroupBox.TabStop = false;
             this.modChangeGroupBox.Text = "Display";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(69, 42);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Refresh";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // localRadioButton
             // 
@@ -272,15 +248,39 @@
             this.searchBTN.UseVisualStyleBackColor = true;
             this.searchBTN.Click += new System.EventHandler(this.searchBTN_Click);
             // 
-            // button2
+            // groupBox3
             // 
-            this.button2.Location = new System.Drawing.Point(69, 42);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Refresh";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.groupBox3.Controls.Add(this.libraryBtn);
+            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox3.Location = new System.Drawing.Point(3, 150);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(149, 80);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Library";
+            // 
+            // libraryBtn
+            // 
+            this.libraryBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.libraryBtn.Location = new System.Drawing.Point(6, 51);
+            this.libraryBtn.Name = "libraryBtn";
+            this.libraryBtn.Size = new System.Drawing.Size(137, 23);
+            this.libraryBtn.TabIndex = 2;
+            this.libraryBtn.Text = "Load Library Directory";
+            this.libraryBtn.UseVisualStyleBackColor = true;
+            this.libraryBtn.Click += new System.EventHandler(this.libraryBtn_Click);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(6, 22);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(137, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Display All Artists";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // mainForm
             // 
@@ -300,10 +300,10 @@
             this.artistWikiPanel.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
             this.modChangeGroupBox.ResumeLayout(false);
             this.modChangeGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pageHaveImagesNumber)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

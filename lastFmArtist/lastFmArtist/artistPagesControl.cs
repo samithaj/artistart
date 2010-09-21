@@ -20,27 +20,28 @@ namespace lastFmArtist
         //This is pages' collection,each CONTAINING ARRAY OF ONE PAGE'S IMAGES
         private ArrayList artistPagesArraylist;
         private int downloadingPage = -1;
-        private RadioButton mode;
         public string artistPath = mainForm.savePath;
+        public bool isDrawed = true;
 
         /*Contructors         
          */
         public artistPagesControl()
         {
+
             InitializeComponent();
         }
-        public artistPagesControl(string inArtist, int imagesHaveCountIn, RadioButton modeIn)
+        public artistPagesControl(string inArtist, int imagesHaveCountIn)
         {
-            InitializeComponent();
+
             this.artistName = inArtist;
             this.imagesHaveCount = imagesHaveCountIn;
-            this.mode = modeIn;
-
+            // this.mode = modeIn;
             this.artistPath = mainForm.savePath;
-            this.artistImagePathtextBox.Text = this.artistPath;
-
-            artistPagesArraylist = new ArrayList();
-            drawPage(pageNum);
+            //InitializeComponent();
+            //this.artistImagePathtextBox.Text = this.artistPath;
+            //artistPagesArraylist = new ArrayList();
+            this.isDrawed = false;
+            ////drawPage(pageNum);
         }
 
         /*Private Methods
@@ -144,7 +145,8 @@ namespace lastFmArtist
 
         private void drawPage(int targetPage)
         {
-            if (mode.Checked)
+            this.SuspendLayout();
+            if (((RadioButton)(this.TopLevelControl.Controls[0].Controls[1].Controls[2].Controls[1].Controls[1])).Checked)
             {
                 this.nextBtn.Enabled = false;
                 this.preBtn.Enabled = false;
@@ -153,17 +155,12 @@ namespace lastFmArtist
                 this.flowLayoutPanel1.Controls.Clear();
 
                 string[] fileNames = System.IO.Directory.GetFiles(this.artistPath, "*" + artistName + "*");
-
-
-
                 for (int i = 0; i < fileNames.Length; i++)
                 {
                     imageShow aShow = new imageShow(i, fileNames[i], fileNames[i], this.artistName, artistPath);
 
                     this.flowLayoutPanel1.Controls.Add(aShow);
                 }
-
-
             }
             else
             {
@@ -215,9 +212,10 @@ namespace lastFmArtist
                     this.pageNumberLabel.Text = targetPage.ToString() + "/" + this.artistPagesArraylist.Count.ToString();
                     this.nextBtn.Enabled = true;
                     this.downloadAllbtn.Enabled = true;
-
                 }
             }
+            this.ResumeLayout();
+            this.isDrawed = true;
         }
 
         private void downloadAllbtn_Click(object sender, EventArgs e)
@@ -232,11 +230,6 @@ namespace lastFmArtist
                     }
                 }
             }
-        }
-
-        private void flowLayoutPanel1_Click(object sender, EventArgs e)
-        {
-            this.flowLayoutPanel1.Focus();
         }
 
         private void artistImagePathtextBox_Click(object sender, EventArgs e)
@@ -264,16 +257,28 @@ namespace lastFmArtist
          */
         public void redrawPage()
         {
-            this.artistPagesArraylist.Clear();
+            if (!this.isDrawed)
+            {
+                InitializeComponent();
+                this.artistImagePathtextBox.Text = this.artistPath;
+                artistPagesArraylist = new ArrayList();
+            }
             drawPage(pageNum);
         }
 
         public void redrawPage(int imageOnePageHas)
         {
-            this.imagesHaveCount = imageOnePageHas;
-            this.artistPagesArraylist.Clear();
-            this.pageNum = 1;
+            if (!this.isDrawed)
+            {
+                InitializeComponent();
+                this.artistImagePathtextBox.Text = this.artistPath;
+                artistPagesArraylist = new ArrayList();
+            }
 
+            this.imagesHaveCount = imageOnePageHas;
+            if (this.imagesHaveCount != imageOnePageHas)
+                this.artistPagesArraylist.Clear();
+            this.pageNum = 1;
             drawPage(pageNum);
         }
 
@@ -296,6 +301,11 @@ namespace lastFmArtist
         {
             if (this.Parent.Parent.Parent.Parent.Parent is mainForm)
                 ((SplitContainer)(this.Parent.Parent.Parent.Parent.Parent.Controls["splitContainer1"])).Panel2Collapsed = ((SplitContainer)(this.Parent.Parent.Parent.Parent.Parent.Controls["splitContainer1"])).Panel2Collapsed ? false : true;
+        }
+
+        private void flowLayoutPanel1_Click(object sender, EventArgs e)
+        {
+            this.flowLayoutPanel1.Focus();
         }
 
 

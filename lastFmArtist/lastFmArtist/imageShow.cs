@@ -63,6 +63,7 @@ namespace lastFmArtist
         //Update image status, is it downloaded?
         public void updateStatus()
         {
+            if (isDownloading) return;
             getPath();
             //If downloaded, use local file for displaying
             if (File.Exists(this.path))

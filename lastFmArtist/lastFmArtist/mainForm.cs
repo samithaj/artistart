@@ -62,11 +62,14 @@ namespace lastFmArtist
             if (this.artistNameTXB.Text != string.Empty)
             {
                 addOrSwitchNewArtistTab(this.artistNameTXB.Text, true);
+                if (this.artistTabPage.TabPages.Count == 1) artistTabPage_SelectedIndexChanged(null, null);
+                this.artistTabPage.SelectedTab = this.artistTabPage.TabPages[this.artistNameTXB.Text];
                 if (this.withWikiCheckBox.Checked)
                 {
                     fetchWiki(this.artistNameTXB.Text);
                 }
-                this.artistTabPage.SelectTab(this.artistNameTXB.Text);
+                //((artistPagesControl)(artistTabPage.SelectedTab.Controls[0])).redrawPage();
+
             }
         }
 
@@ -84,76 +87,67 @@ namespace lastFmArtist
             }
             else
             {
-                ((artistPagesControl)(artistTabPage.SelectedTab.Controls["page"])).redrawPage((int)(this.pageHaveImagesNumber.Value));
+                ((artistPagesControl)(artistTabPage.SelectedTab.Controls["artistPagesControl"])).redrawPage((int)(this.pageHaveImagesNumber.Value));
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            List<string> artistEnu = new List<string>();
             if (MessageBox.Show("This will cost a lot of your memory if you have a large collection, continue?", "Confirm Display All", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 this.artistTabPage.TabPages.Clear();
                 this.localRadioButton.CheckedChanged -= new EventHandler(localRadioButton_CheckedChanged);
                 this.localRadioButton.Select();
                 this.localRadioButton.CheckedChanged += new EventHandler(localRadioButton_CheckedChanged);
-                string[] fileNames = System.IO.Directory.GetFiles(mainForm.savePath, "*_*.jpg");
-                foreach (string artistNameTmp in fileNames)
+
+                List<string> artistFileNames = new List<string>();
+                artistFileNames.AddRange(System.IO.Directory.GetFiles(mainForm.savePath, "*_*.jpg"));
+                artistFileNames.AddRange(System.IO.Directory.GetFiles(mainForm.savePath, "*_*.png"));
+                artistFileNames.AddRange(System.IO.Directory.GetFiles(mainForm.savePath, "*_*.gif"));
+                string temp;
+                foreach (string artistNameTmp in artistFileNames)
                 {
-                    addOrSwitchNewArtistTab(System.IO.Path.GetFileNameWithoutExtension(artistNameTmp.Remove(artistNameTmp.LastIndexOf('_'))), false);
+                    temp = System.IO.Path.GetFileNameWithoutExtension(artistNameTmp.Remove(artistNameTmp.LastIndexOf('_')));
+                    if (!(artistEnu.Contains(temp)))
+                        artistEnu.Add(System.IO.Path.GetFileNameWithoutExtension(artistNameTmp.Remove(artistNameTmp.LastIndexOf('_'))));
                 }
-                fileNames = System.IO.Directory.GetFiles(mainForm.savePath, "*_*.png");
-                foreach (string artistNameTmp in fileNames)
+                foreach (string artistNameTmp in artistEnu)
                 {
-                    addOrSwitchNewArtistTab(System.IO.Path.GetFileNameWithoutExtension(artistNameTmp.Remove(artistNameTmp.LastIndexOf('_'))), false);
-                }
-                fileNames = System.IO.Directory.GetFiles(mainForm.savePath, "*_*.gif");
-                foreach (string artistNameTmp in fileNames)
-                {
-                    addOrSwitchNewArtistTab(System.IO.Path.GetFileNameWithoutExtension(artistNameTmp.Remove(artistNameTmp.LastIndexOf('_'))), false);
+                    addOrSwitchNewArtistTab(artistNameTmp, false);
                 }
             }
+            artistTabPage_SelectedIndexChanged(null, null);
 
         }
 
         private void addOrSwitchNewArtistTab(string artistNameTmp, bool isToGotoFoundTab)
         {
-            bool found = false;
-            foreach (TabPage artistTabPageTmp in this.artistTabPage.TabPages)
+            if (this.artistTabPage.TabPages.ContainsKey(artistNameTmp))
             {
-                if (artistTabPageTmp.Text.Equals(artistNameTmp, StringComparison.CurrentCultureIgnoreCase))
+                if (isToGotoFoundTab)
                 {
-                    if (isToGotoFoundTab)
+                    artistTabPage.SelectTab(artistNameTmp);
+                    if ((int)(this.pageHaveImagesNumber.Value) != this.oldImagesOnePageHas)
                     {
-                        artistTabPage.SelectTab(artistTabPageTmp.Name);
-
-                        if ((int)(this.pageHaveImagesNumber.Value) != this.oldImagesOnePageHas)
-                        {
-                            this.oldImagesOnePageHas = (int)(this.pageHaveImagesNumber.Value);
-                            ((artistPagesControl)(artistTabPage.SelectedTab.Controls["page"])).redrawPage(this.oldImagesOnePageHas);
-                        }
-                        else
-                        {
-                            //       ((artistPagesControl)(artistTabPage.SelectedTab.Controls["page"])).redrawPage();
-                        }
+                        this.oldImagesOnePageHas = (int)(this.pageHaveImagesNumber.Value);
+                        ((artistPagesControl)(artistTabPage.SelectedTab.Controls["artistPagesControl"])).redrawPage(this.oldImagesOnePageHas);
                     }
-                    found = true;
-                    return;
                 }
             }
-            if (!found || artistTabPage.TabPages.Count == 0)
+            else
             {
                 this.oldImagesOnePageHas = (int)(this.pageHaveImagesNumber.Value);
-
                 TabPage anewTabPage = new TabPage(artistNameTmp);
                 anewTabPage.Name = artistNameTmp;
-
-                artistPagesControl anewArtistTabPage = new artistPagesControl(artistNameTmp, (int)(this.pageHaveImagesNumber.Value), localRadioButton);
-                anewArtistTabPage.Dock = DockStyle.Fill;
-                anewArtistTabPage.Name = "page";
-                anewTabPage.Controls.Add(anewArtistTabPage);
-                this.SuspendLayout();
+                //artistPagesControl anewArtistTabPage = new artistPagesControl(artistNameTmp, (int)(this.pageHaveImagesNumber.Value));
+                //anewArtistTabPage.Name = "page";
+                //anewTabPage.Controls.Add(anewArtistTabPage);
+                //this.SuspendLayout();
                 this.artistTabPage.TabPages.Add(anewTabPage);
-                this.ResumeLayout();
+                //anewArtistTabPage.Dock = DockStyle.Fill;
+                //((artistPagesControl)(artistTabPage.SelectedTab.Controls[0])).redrawPage();
+                //this.ResumeLayout();
             }
         }
 
@@ -228,8 +222,6 @@ namespace lastFmArtist
             ((TabControl)sender).SelectedTab.Dispose();
         }
 
-
-
         private void libraryBtn_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog aNewDialog = new FolderBrowserDialog();
@@ -243,8 +235,29 @@ namespace lastFmArtist
 
         private void artistTabPage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.withWikiCheckBox.Checked && this.artistTabPage.TabCount > 0)
-                fetchWiki(this.artistTabPage.SelectedTab.Text);
+            if (this.artistTabPage.TabCount > 0)
+            {
+                if (this.withWikiCheckBox.Checked)
+                    fetchWiki(this.artistTabPage.SelectedTab.Text);
+                //if (!((artistPagesControl)(this.artistTabPage.SelectedTab.Controls[0])).isDrawed)
+                //    ((artistPagesControl)(this.artistTabPage.SelectedTab.Controls[0])).redrawPage();
+
+                if (this.artistTabPage.SelectedTab.Controls.Count != 0)
+                {
+                    if (!this.localRadioButton.Checked) ((artistPagesControl)(this.artistTabPage.SelectedTab.Controls[0])).redrawPage((int)this.pageHaveImagesNumber.Value);
+                }
+                else
+                {
+                    this.SuspendLayout();
+                    artistPagesControl anewArtistTabPage = new artistPagesControl(this.artistTabPage.SelectedTab.Name, (int)(this.pageHaveImagesNumber.Value));
+
+                    this.artistTabPage.SelectedTab.Controls.Add(anewArtistTabPage);
+                    anewArtistTabPage.Dock = DockStyle.Fill;
+                    ((artistPagesControl)(artistTabPage.SelectedTab.Controls[0])).redrawPage();
+                    this.ResumeLayout();
+
+                }
+            }
         }
 
         private void withWikiCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -349,8 +362,9 @@ namespace lastFmArtist
         private void button2_Click(object sender, EventArgs e)
         {
             if (this.artistTabPage.SelectedTab != null)
-                ((artistPagesControl)(this.artistTabPage.SelectedTab.Controls["page"])).redrawPage((int)(this.pageHaveImagesNumber.Value));
+                ((artistPagesControl)(this.artistTabPage.SelectedTab.Controls["artistPagesControl"])).redrawPage((int)(this.pageHaveImagesNumber.Value));
         }
+
 
 
     }
